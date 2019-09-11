@@ -20,9 +20,11 @@ namespace HomeWork2_Task2
 
             while (flag)
             {
-                int answer = Convert.ToInt32(Console.ReadLine());
+                int answer;
 
-                if (answer > 100 || answer < 1)
+                bool answerCheck = Int32.TryParse(Console.ReadLine(), out answer);
+
+                if (answer > 100 || answer < 1 || answerCheck == false)
                 {
                     Console.WriteLine($"\nWrong number, enter a number from 1 to 100:\n");
                 }
