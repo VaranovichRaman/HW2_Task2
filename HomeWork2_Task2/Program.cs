@@ -10,33 +10,36 @@ namespace HomeWork2_Task2
     {
         static void Main(string[] args)
         {
-            bool flag = true;
+            IntegerGuesser();
+            Console.ReadLine();
+        }
+        static void IntegerGuesser()
+        {
+            Random rand = new Random();
 
-            Random number = new Random();
-
-            int number1 = number.Next(1, 100);
+            int number = rand.Next(1, 100);
 
             Console.WriteLine($"Greatings in \"Integer guesser\"! I'll guess a number from 1 to 100, and you should find this number. Let's get started, enter a number:\n");
 
+            Choice(number);
+        }
+        static void Choice(int number)
+        {
+            bool flag = true;
+
             while (flag)
             {
-                int answer;
+                int result = AnswerCheck();
 
-                bool answerCheck = Int32.TryParse(Console.ReadLine(), out answer);
-
-                if (answer > 100 || answer < 1 || answerCheck == false)
-                {
-                    Console.WriteLine($"\nWrong number, enter a number from 1 to 100:\n");
-                }
-                else if (answer > number1)
+                if (result > number)
                 {
                     Console.WriteLine($"\nThe guessed number is less, try again:\n");
                 }
-                else if (answer < number1)
+                else if (result < number)
                 {
                     Console.WriteLine($"\nThe guessed number is bigger, try again:\n");
                 }
-                else if (number1 == answer)
+                else if (number == result)
                 {
                     Console.WriteLine($"\nGreat you won! See you next time.");
 
@@ -44,7 +47,27 @@ namespace HomeWork2_Task2
 
                 }
             }
-            Console.ReadLine();
+        }
+        static int AnswerCheck()
+        {
+            int answer=0;
+            bool flag = true;
+
+            while (flag)
+            {
+                bool answerCheck = Int32.TryParse(Console.ReadLine(), out answer);
+
+                if (answer > 100 || answer < 1 || answerCheck == false)
+                {
+                    Console.WriteLine($"\nWrong number, enter a number from 1 to 100:\n");
+                }
+                else
+                {
+                    flag = false;
+                }
+            }
+            
+            return answer;
         }
     }
 }
